@@ -30,7 +30,13 @@ jobs:
           node-version: '22'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Install dependencies
+      - name: Build shared package
+        working-directory: ./packages/shared
+        run: |
+          npm install
+          npm run build
+
+      - name: Install frontend dependencies
         working-directory: ./packages/frontend
         run: npm install
 
