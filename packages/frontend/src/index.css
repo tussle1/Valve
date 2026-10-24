@@ -1,0 +1,344 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --valve-bg: #101114;
+    --valve-sidebar: #141519;
+    --valve-editor: #101114;
+    --valve-panel: #191B20;
+    --valve-hover: #22252C;
+    --valve-border: #2A2D35;
+    --valve-text: #F1F2F5;
+    --valve-text-secondary: #A0A4B0;
+    --valve-text-muted: #707582;
+    --valve-accent: #8B5CF6;
+    --valve-accent-hover: #7C3AED;
+  }
+
+  * {
+    @apply border-valve-border;
+  }
+
+  body {
+    background-color: var(--valve-bg);
+    color: var(--valve-text);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  ::selection {
+    @apply bg-valve-accent/30 text-valve-text;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-valve-border rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-valve-text-muted;
+  }
+
+  ::-webkit-scrollbar-corner {
+    @apply bg-transparent;
+  }
+}
+
+@layer components {
+  .valve-btn {
+    @apply inline-flex items-center justify-center gap-2 px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-fast focus:outline-none focus-visible:ring-2 focus-visible:ring-valve-accent focus-visible:ring-offset-2 focus-visible:ring-offset-valve-bg disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .valve-btn-primary {
+    @apply valve-btn bg-valve-accent text-white hover:bg-valve-accent-hover active:bg-valve-accent/90;
+  }
+
+  .valve-btn-secondary {
+    @apply valve-btn bg-valve-panel text-valve-text hover:bg-valve-hover active:bg-valve-border;
+  }
+
+  .valve-btn-ghost {
+    @apply valve-btn bg-transparent text-valve-text-secondary hover:bg-valve-hover hover:text-valve-text active:bg-valve-border;
+  }
+
+  .valve-btn-danger {
+    @apply valve-btn bg-valve-error/10 text-valve-error hover:bg-valve-error/20 active:bg-valve-error/30;
+  }
+
+  .valve-input {
+    @apply w-full px-3 py-2 text-sm bg-valve-panel border border-valve-border rounded-md text-valve-text placeholder-valve-text-muted focus:outline-none focus:ring-2 focus:ring-valve-accent focus:border-transparent transition-all duration-fast;
+  }
+
+  .valve-panel {
+    @apply bg-valve-panel border border-valve-border rounded-lg;
+  }
+
+  .valve-sidebar {
+    @apply bg-valve-sidebar border-r border-valve-border;
+  }
+
+  .valve-tab {
+    @apply px-3 py-1.5 text-sm font-medium rounded-t-md transition-colors duration-fast focus:outline-none focus-visible:ring-2 focus-visible:ring-valve-accent focus-visible:ring-offset-2 focus-visible:ring-offset-valve-bg;
+  }
+
+  .valve-tab-active {
+    @apply valve-tab bg-valve-editor text-valve-text border-b-2 border-valve-accent;
+  }
+
+  .valve-tab-inactive {
+    @apply valve-tab bg-valve-panel/50 text-valve-text-muted hover:bg-valve-hover hover:text-valve-text;
+  }
+
+  .valve-icon-btn {
+    @apply p-1.5 rounded-md text-valve-text-muted hover:text-valve-text hover:bg-valve-hover active:bg-valve-border transition-all duration-fast focus:outline-none focus-visible:ring-2 focus-visible:ring-valve-accent;
+  }
+
+  .valve-dropdown {
+    @apply valve-panel shadow-lg py-1 min-w-[160px];
+    animation: animateIn 0.15s ease-out;
+  }
+
+  .valve-dropdown-item {
+    @apply px-3 py-2 text-sm text-valve-text-secondary hover:bg-valve-hover hover:text-valve-text cursor-pointer transition-colors duration-fast;
+  }
+
+  .valve-tooltip {
+    @apply absolute z-tooltip px-2 py-1 text-xs bg-valve-border text-valve-text rounded shadow-lg whitespace-nowrap;
+    animation: animateIn 0.15s ease-out;
+  }
+
+  .valve-splitter {
+    @apply relative bg-valve-border hover:bg-valve-text-muted active:bg-valve-accent transition-colors duration-fast;
+  }
+
+  .valve-splitter::before {
+    content: "";
+    @apply absolute inset-0 bg-valve-border/50;
+  }
+
+  .valve-splitter-vertical {
+    @apply valve-splitter w-1 cursor-col-resize;
+  }
+
+  .valve-splitter-horizontal {
+    @apply valve-splitter h-1 cursor-row-resize;
+  }
+
+  .valve-badge {
+    @apply inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full;
+  }
+
+  .valve-badge-accent {
+    @apply valve-badge bg-valve-accent/10 text-valve-accent;
+  }
+
+  .valve-badge-success {
+    @apply valve-badge bg-valve-success/10 text-valve-success;
+  }
+
+  .valve-badge-warning {
+    @apply valve-badge bg-valve-warning/10 text-valve-warning;
+  }
+
+  .valve-badge-error {
+    @apply valve-badge bg-valve-error/10 text-valve-error;
+  }
+
+  .valve-scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--valve-border) transparent;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-in {
+    animation: animateIn 0.15s ease-out;
+  }
+
+  @keyframes animateIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .fade-in {
+    animation: fadeIn 0.15s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .slide-in-from-top {
+    animation: slideInFromTop 0.15s ease-out;
+  }
+
+  @keyframes slideInFromTop {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .slide-in-from-bottom {
+    animation: slideInFromBottom 0.15s ease-out;
+  }
+
+  @keyframes slideInFromBottom {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .slide-in-from-left {
+    animation: slideInFromLeft 0.15s ease-out;
+  }
+
+  @keyframes slideInFromLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .slide-in-from-right {
+    animation: slideInFromRight 0.15s ease-out;
+  }
+
+  @keyframes slideInFromRight {
+    from {
+      opacity: 0;
+      transform: translateX(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+/* Monaco Editor overrides */
+.monaco-editor {
+  background-color: var(--valve-bg);
+  color: var(--valve-text);
+}
+
+.monaco-editor .margin {
+  background-color: var(--valve-editor);
+}
+
+.monaco-editor .line-numbers {
+  @apply text-valve-text-muted;
+}
+
+.monaco-editor .cursor {
+  @apply bg-valve-accent;
+}
+
+.monaco-editor .selected-text {
+  @apply bg-valve-accent/30;
+}
+
+.monaco-editor .lineHighlight {
+  @apply bg-valve-panel/50;
+}
+
+.monaco-editor .findMatch {
+  @apply bg-valve-warning/30;
+}
+
+.monaco-editor .currentFindMatch {
+  @apply bg-valve-warning/50;
+}
+
+/* xterm overrides */
+.xterm {
+  background-color: var(--valve-bg);
+  color: var(--valve-text);
+  font-family: var(--font-mono);
+}
+
+.xterm .xterm-cursor {
+  @apply bg-valve-accent;
+}
+
+.xterm .xterm-selection {
+  @apply bg-valve-accent/30;
+}
+
+/* Markdown rendering */
+.markdown-content {
+  max-width: none;
+}
+
+.markdown-content pre {
+  @apply bg-valve-panel border border-valve-border rounded-lg p-4 overflow-x-auto;
+}
+
+.markdown-content code {
+  @apply font-mono text-sm bg-valve-panel/50 px-1.5 py-0.5 rounded;
+}
+
+.markdown-content pre code {
+  @apply bg-transparent p-0 text-valve-text;
+}
+
+.markdown-content h1, .markdown-content h2, .markdown-content h3, .markdown-content h4 {
+  @apply text-valve-text font-semibold;
+}
+
+.markdown-content a {
+  @apply text-valve-accent hover:text-valve-accent-hover underline-offset-2;
+}
+
+.markdown-content blockquote {
+  @apply border-l-4 border-valve-accent pl-4 italic text-valve-text-secondary;
+}
+
+.markdown-content table {
+  @apply w-full border-collapse;
+}
+
+.markdown-content th, .markdown-content td {
+  @apply border border-valve-border px-3 py-2 text-left;
+}
+
+.markdown-content th {
+  @apply bg-valve-panel font-semibold;
+}
+
+.markdown-content tr:nth-child(even) {
+  @apply bg-valve-panel/50;
+}
