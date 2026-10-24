@@ -34,7 +34,7 @@ jobs:
         working-directory: ./packages/shared
         run: |
           npm install
-          npm run build
+          npx tsc
 
       - name: Install frontend dependencies
         working-directory: ./packages/frontend
