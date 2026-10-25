@@ -1,0 +1,29 @@
+# Fly.io deployment config for Valve IDE Backend
+app = "valve-backend"
+primary_region = "iad"
+
+[build]
+  dockerfile = "packages/backend/Dockerfile"
+
+[http_service]
+  internal_port = 3001
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[env]
+  NODE_ENV = "production"
+  PORT = "3001"
+  # Set these via: fly secrets set JWT_SECRET=... ENCRYPTION_KEY=... FRONTEND_URL=...
+
+[mounts]
+  # Optional: for persistent JSON file storage
+  # source = "valve_data"
+  # destination = "/app/data"
+
+[[services]]
+  protocol = "tcp"
+  internal_port = 3001
+  ports = [{ port = 80, handlers = ["http"] }, { port = 443, handlers = ["tls", "http"] }]
