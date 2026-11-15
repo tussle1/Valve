@@ -1,9 +1,10 @@
 // Environment configuration for Valve Frontend
 // All values can be overridden via VITE_* environment variables
 
-// Default production backend URL (replace with your Fly.io URL after deploy)
-const PROD_API_URL = 'https://valve-backend.fly.dev';
-const PROD_WS_URL = 'wss://valve-backend.fly.dev';
+// Default production backend URL — UPDATE AFTER RAILWAY DEPLOY
+// Railway gives you: https://your-app-name.up.railway.app
+const PROD_API_URL = 'https://valve-backend.up.railway.app';
+const PROD_WS_URL = 'wss://valve-backend.up.railway.app';
 
 export const config = {
   // Backend API URL
