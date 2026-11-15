@@ -3,8 +3,8 @@
 
 // Default production backend URL — UPDATE AFTER RAILWAY DEPLOY
 // Railway gives you: https://your-app-name.up.railway.app
-const PROD_API_URL = 'https://valve-backend.up.railway.app';
-const PROD_WS_URL = 'wss://valve-backend.up.railway.app';
+const PROD_API_URL = 'https://valve-backend-production-6abc87e8.up.railway.app';
+const PROD_WS_URL = 'wss://valve-backend-production-6abc87e8.up.railway.app';
 
 export const config = {
   // Backend API URL
